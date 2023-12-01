@@ -1,0 +1,57 @@
+﻿@using MyFirstProject.Models.Enum;
+@using MyFirstProject.Models.Services;
+@using MyFirstProject.Models;
+@{
+    ViewData["Title"] = "Главная страница";
+}
+
+<body>
+    <h1>Главная страница</h1>
+
+    <form method="post" asp-controller="Home" asp-action="Index">
+        <div class="filters">
+            <input type="date" id="startDate" name="startDate">
+            <input type="date" id="endDate" name="endDate">
+            <select class="filter-select" name="status">
+                <option value="Default">Все заказы</option>
+                <option value="Completed">Завершенные заказы</option>
+                <option value="Pending">Ожидающие заказы</option>
+            </select>
+            <button class="btn btn-primary" type="submit">Применить фильтры</button>
+            <button class="btn btn-primary" type="submit">Добавить</button>
+        </div>
+    </form>
+
+    <table class="table table-hover" id="ordersTable">
+        <thead>
+            <tr>
+                <th>Номер заказа</th>
+                <th>Дата заказа</th>
+                <th>Статус</th>
+                <th>Подробнее о заказе</th>
+                <th>Редактировать</th>
+                <th>Удалить</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var orderItem in Model)
+            {
+                <tr>
+                    <td>@orderItem.Number</td>
+                    <td>@orderItem.Date</td>
+                    <td>@EnumExtensions.GetDescription(orderItem.Status)</td>
+                    <td><a href="@Url.Action("Details", new { id = orderItem.Id })">Подробнее</a></td>
+                    <td>
+                        <a asp-controller="Home" asp-action="Edit" asp-route-id="@orderItem.Id">Редактировать</a>
+                    </td>
+                    <td>
+                        <a asp-controller="Home" asp-action="Delete" asp-route-id="@orderItem.Id">Удалить</a>
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+</body>
+

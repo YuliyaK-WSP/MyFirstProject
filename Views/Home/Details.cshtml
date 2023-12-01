@@ -1,0 +1,15 @@
+﻿@using MyFirstProject.Models;
+
+@{
+    ViewData["Title"] = "Order Descriptions";
+}
+<h1>Подробная информация о заказе</h1>
+@foreach (var orderItem in Model)
+{
+    <div>
+        <h4>Наименование товара: @orderItem.Name</h4>
+        <h4>Количество: @orderItem.Quantity</h4>
+        <h4>Ед.Измерен: @orderItem.Unit</h4>
+    </div>
+}
+

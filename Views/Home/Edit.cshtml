@@ -1,0 +1,31 @@
+﻿@model Order
+
+<h1>Редактирование заказа</h1>
+
+<form method="post" asp-controller="Home" asp-action="Edit">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Number">Номер заказа</label>
+        <input asp-for="Number" class="form-control" />
+        <span asp-validation-for="Number" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Date">Дата заказа</label>
+        <input asp-for="Date" class="form-control" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Status">Статус</label>
+        <select asp-for="Status" class="form-control">
+            <option value="Default">Все заказы</option>
+            <option value="Completed">Завершенные заказы</option>
+            <option value="Pending">Ожидающие заказы</option>
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
